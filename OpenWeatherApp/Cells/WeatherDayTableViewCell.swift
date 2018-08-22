@@ -22,8 +22,8 @@ class WeatherDayTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 90, height: 90)
-        layout.minimumLineSpacing = 2.0
-        layout.minimumInteritemSpacing = 2.0
+        layout.minimumLineSpacing = 4.0
+        layout.minimumInteritemSpacing = 4.0
         layout.scrollDirection = .horizontal
         collectionView.setCollectionViewLayout(layout, animated: false)
         collectionView.contentInset = UIEdgeInsets(top: 0.0, left: 15.0, bottom: 0.0, right: 15.0)

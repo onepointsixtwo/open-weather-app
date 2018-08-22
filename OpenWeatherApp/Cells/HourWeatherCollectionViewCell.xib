@@ -20,36 +20,43 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qJ6-i3-xj7">
-                        <rect key="frame" x="30.5" y="70" width="29.5" height="14"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <rect key="frame" x="32" y="70" width="27" height="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23 Degrees" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R2c-uB-9au">
-                        <rect key="frame" x="9.5" y="2" width="70.5" height="16"/>
+                        <rect key="frame" x="9.5" y="7" width="70.5" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gAC-ov-jp2">
-                        <rect key="frame" x="18" y="20" width="55" height="48"/>
+                        <rect key="frame" x="18" y="25" width="55" height="43"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="55" id="LWz-oe-WHw"/>
                         </constraints>
                     </imageView>
                 </subviews>
             </view>
+            <color key="backgroundColor" white="1" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="R2c-uB-9au" firstAttribute="top" secondItem="LXi-rU-LSj" secondAttribute="top" constant="2" id="6Lv-8l-TkM"/>
+                <constraint firstItem="R2c-uB-9au" firstAttribute="top" secondItem="LXi-rU-LSj" secondAttribute="top" constant="7" id="6Lv-8l-TkM"/>
                 <constraint firstItem="qJ6-i3-xj7" firstAttribute="top" secondItem="gAC-ov-jp2" secondAttribute="bottom" constant="2" id="Tzw-yB-rqZ"/>
                 <constraint firstItem="gAC-ov-jp2" firstAttribute="centerX" secondItem="LXi-rU-LSj" secondAttribute="centerX" id="Xuy-eU-F7E"/>
                 <constraint firstItem="gAC-ov-jp2" firstAttribute="top" secondItem="R2c-uB-9au" secondAttribute="bottom" constant="2" id="gch-HY-gDf"/>
                 <constraint firstItem="qJ6-i3-xj7" firstAttribute="centerX" secondItem="LXi-rU-LSj" secondAttribute="centerX" id="jkE-GQ-seo"/>
                 <constraint firstItem="R2c-uB-9au" firstAttribute="centerX" secondItem="LXi-rU-LSj" secondAttribute="centerX" id="pgY-uK-w9b"/>
-                <constraint firstAttribute="bottom" secondItem="qJ6-i3-xj7" secondAttribute="bottom" constant="6" id="vPi-Kn-Wmx"/>
+                <constraint firstAttribute="bottom" secondItem="qJ6-i3-xj7" secondAttribute="bottom" constant="8" id="vPi-Kn-Wmx"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="rKF-cE-liS"/>
             <size key="customSize" width="90" height="90"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                    <integer key="value" value="8"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="imageView" destination="gAC-ov-jp2" id="OWs-e9-bMD"/>
                 <outlet property="temperatureLabel" destination="R2c-uB-9au" id="FJk-ji-bPl"/>

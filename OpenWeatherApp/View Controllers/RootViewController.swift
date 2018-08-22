@@ -13,6 +13,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
 
     var pageViewController: UIPageViewController!
     @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var explanatoryLabel: UILabel!
 
     private var observable: Observable<Forecast, OpenWeatherError>?
     private var observable2: Observable<UIImage, OpenWeatherError>?
@@ -39,6 +40,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
         self.pageViewController!.dataSource = self.modelController
 
         self.addChildViewController(self.pageViewController!)
+        self.pageViewController.view.backgroundColor = UIColor.clear
         self.view.insertSubview(self.pageViewController!.view, at: 1)
         self.view.bringSubview(toFront: addButton)
 
@@ -115,6 +117,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
 extension RootViewController: MapViewControllerDelegate {
     func mapViewDidSelectCoordinates(coordinates: CLLocationCoordinate2D) {
         modelController.addNewLocation(location: coordinates)
+        explanatoryLabel.isHidden = true
     }
 }
 

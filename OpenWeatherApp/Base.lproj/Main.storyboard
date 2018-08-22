@@ -98,21 +98,32 @@
                                     <segue destination="CEM-s3-zSI" kind="presentation" id="fe3-Il-jo2"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Click the (+) to see the weather for a location" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wf4-7h-wEN">
+                                <rect key="frame" x="25" y="313" width="324" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.61568627450000002" green="0.78823529410000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="wf4-7h-wEN" firstAttribute="leading" secondItem="iAZ-4m-2z3" secondAttribute="leading" constant="25" id="AeC-TX-bae"/>
+                            <constraint firstItem="wf4-7h-wEN" firstAttribute="centerX" secondItem="502-Ir-ELC" secondAttribute="centerX" id="DWc-6w-5Zx"/>
                             <constraint firstItem="yYr-cv-vBX" firstAttribute="top" secondItem="iAZ-4m-2z3" secondAttribute="top" constant="10" id="G2A-LY-LhR"/>
+                            <constraint firstItem="iAZ-4m-2z3" firstAttribute="trailing" secondItem="wf4-7h-wEN" secondAttribute="trailing" constant="26" id="jMd-kz-xUH"/>
                             <constraint firstItem="yYr-cv-vBX" firstAttribute="leading" secondItem="iAZ-4m-2z3" secondAttribute="leading" constant="25" id="l2K-Ig-1U9"/>
+                            <constraint firstItem="wf4-7h-wEN" firstAttribute="centerY" secondItem="502-Ir-ELC" secondAttribute="centerY" id="vBO-CM-NpN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="iAZ-4m-2z3"/>
                     </view>
                     <connections>
                         <outlet property="addButton" destination="yYr-cv-vBX" id="avE-Zp-DIe"/>
+                        <outlet property="explanatoryLabel" destination="wf4-7h-wEN" id="WVR-Dz-vL6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q3h-pU-vEd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-161" y="-237"/>
+            <point key="canvasLocation" x="-162.40000000000001" y="-237.03148425787109"/>
         </scene>
         <!--Forecast View Controller-->
         <scene sceneID="snT-py-3hH">
@@ -123,13 +134,13 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="cF2-Le-7mQ">
-                                <rect key="frame" x="20" y="32" width="335" height="19.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <rect key="frame" x="20" y="32" width="335" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                 <color key="textColor" red="0.98431372549999996" green="0.98431372549999996" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FlA-hg-WtG">
-                                <rect key="frame" x="0.0" y="59.5" width="375" height="607.5"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
@@ -139,10 +150,10 @@
                                 </connections>
                             </tableView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oi6-vu-HiU">
-                                <rect key="frame" x="0.0" y="56.5" width="375" height="610.5"/>
+                                <rect key="frame" x="0.0" y="61" width="375" height="606"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="KAO-jE-HcK">
-                                        <rect key="frame" x="177" y="295.5" width="20" height="20"/>
+                                        <rect key="frame" x="177" y="293.5" width="20" height="20"/>
                                     </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.61568627450980395" green="0.78823529411764703" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -152,17 +163,17 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lmN-gD-bpe">
-                                <rect key="frame" x="0.0" y="56.5" width="375" height="610.5"/>
+                                <rect key="frame" x="0.0" y="61" width="375" height="606"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SF2-ff-WKT">
-                                        <rect key="frame" x="155" y="290.5" width="64" height="30"/>
+                                        <rect key="frame" x="155" y="288.5" width="64" height="30"/>
                                         <state key="normal" title="Try Again"/>
                                         <connections>
                                             <action selector="tryAgain" destination="S4R-Ja-viH" eventType="touchUpInside" id="R3g-d4-fh7"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="An Error Occurred" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CTe-oa-FuD">
-                                        <rect key="frame" x="118" y="257" width="139" height="21"/>
+                                        <rect key="frame" x="118" y="255" width="139" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
