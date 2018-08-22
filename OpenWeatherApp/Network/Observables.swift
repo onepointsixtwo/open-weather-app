@@ -60,8 +60,10 @@ public final class Observable<V: Any, E: Error>: Lifecycle, Cancellable {
     }
 
     private func handleResultReceived(result: Result<V, E>) {
-        self.result = result
-        self.resultListener?(result)
+        DispatchQueue.main.async {
+            self.result = result
+            self.resultListener?(result)
+        }
     }
 }
 
