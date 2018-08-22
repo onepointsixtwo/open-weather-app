@@ -14,14 +14,17 @@ class ModelController: NSObject, UIPageViewControllerDataSource {
     let pageViewController: UIPageViewController
     let storyboard: UIStoryboard
     let viewModelFactory: ForecastViewModelFactory
+    let weatherImageLoaderFactory: WeatherImageLoaderFactory
     private var pageData = [CLLocation]()
 
     init(pageViewController: UIPageViewController,
          storyboard: UIStoryboard,
-         viewModelFactory: ForecastViewModelFactory) {
+         viewModelFactory: ForecastViewModelFactory,
+         weatherImageLoaderFactory: WeatherImageLoaderFactory) {
         self.pageViewController = pageViewController
         self.storyboard = storyboard
         self.viewModelFactory = viewModelFactory
+        self.weatherImageLoaderFactory = weatherImageLoaderFactory
     }
 
     func viewControllerAtIndex(_ index: Int, storyboard: UIStoryboard) -> ForecastViewController? {
@@ -34,6 +37,7 @@ class ModelController: NSObject, UIPageViewControllerDataSource {
         let dataViewController = storyboard.instantiateViewController(withIdentifier: "DataViewController") as! ForecastViewController
         let location = self.pageData[index]
         dataViewController.viewModel = viewModelFactory.getForecastViewModel(location: location)
+        dataViewController.imageLoaderFactory = weatherImageLoaderFactory
         return dataViewController
     }
 
@@ -79,6 +83,7 @@ class ModelController: NSObject, UIPageViewControllerDataSource {
         if controllers.count == 0 {
             let dataViewController = storyboard.instantiateViewController(withIdentifier: "DataViewController") as! ForecastViewController
             dataViewController.viewModel = viewModelFactory.getForecastViewModel(location: location)
+            dataViewController.imageLoaderFactory = weatherImageLoaderFactory
             controllers.append(dataViewController)
             pageViewController.setViewControllers(controllers, direction: .forward, animated: true, completion: nil)
         }

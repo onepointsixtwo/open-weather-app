@@ -10,8 +10,11 @@ import Foundation
 
 class ObservableField<T: Any> {
 
-    var value: T
-    var observer: ((T) -> ())?
+    private var value: T
+    private var observer: ((T) -> ())?
+    var get: T {
+        return value
+    }
 
     init(value: T) {
         self.value = value

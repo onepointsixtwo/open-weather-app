@@ -33,7 +33,6 @@ class IconService: BaseOpenWeatherService {
     }
 
     private func iconURL(for weather: Weather) -> URL? {
-        let path = "https://openweathermap.org/img/w/\(weather.icon).png"
-        return URL(string: path)
+        return baseURL.appendingPathComponent("img").appendingPathComponent("w").appendingPathComponent("\(weather.icon).png")
     }
 }

@@ -18,15 +18,18 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
     private var observable2: Observable<UIImage, OpenWeatherError>?
 
     let credentials = OpenWeatherCredentials(apiKey: "5c2c7e757185f2faa7dda8bfa413070d")
-    let baseURL = URL(string: "https://api.openweathermap.org")!
+    let baseApiURL = URL(string: "https://api.openweathermap.org")!
+    let baseImageURL = URL(string: "https://openweathermap.org")!
     var networkStack: NetworkStack!
     var forecastService: FiveDayForecastService!
+    var iconService: IconService!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         networkStack = URLSessionNetworkStack(urlSession: URLSession(configuration: URLSessionConfiguration.default))
-        forecastService = FiveDayForecastServiceImpl(networkStack: networkStack, credentials: credentials, baseURL: baseURL)
+        forecastService = FiveDayForecastServiceImpl(networkStack: networkStack, credentials: credentials, baseURL: baseApiURL)
+        iconService = IconService(networkStack: networkStack, credentials: credentials, baseURL: baseImageURL)
 
         // Do any additional setup after loading the view, typically from a nib.
         // Configure the page view controller and add it as a child view controller.
@@ -60,7 +63,10 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
         // Return the model controller object, creating it if necessary.
         // In more complex implementations, the model controller may be passed to the view controller.
         if _modelController == nil {
-            _modelController = ModelController(pageViewController: pageViewController, storyboard: self.storyboard!, viewModelFactory: ForecastViewModelFactory(forecastService: forecastService))
+            _modelController = ModelController(pageViewController: pageViewController,
+                                               storyboard: self.storyboard!,
+                                               viewModelFactory: ForecastViewModelFactory(forecastService: forecastService),
+                                               weatherImageLoaderFactory: WeatherImageLoaderFactory(iconService: iconService))
         }
         return _modelController!
     }
