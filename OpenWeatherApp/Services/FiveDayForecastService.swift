@@ -9,38 +9,24 @@
 import CoreLocation
 import Foundation
 
-struct WeatherList {
-    let list: [WeatherListItem]
-}
+class FiveDayForecastService: BaseOpenWeatherService {
 
-struct WeatherListItem {
-    let dt: Date
-    let weather: Weather
-    let temp: Temp
-}
-
-struct Weather {
-    let icon: String
-    let main: String
-}
-
-struct Temp {
-    let temp: Double
-}
-
-enum FiveDayForecastServiceError: Error {
-    case general
-}
-
-class FiveDayForecastService {
-
-    let networkStack: NetworkStack
-
-    init(networkStack: NetworkStack) {
-        self.networkStack = networkStack
+    func getWeatherList(for location: CLLocation) -> Observable<WeatherList, OpenWeatherError>  {
+        let request = getRequest(for: location)
+        let parser = WeatherListParser()
+        let errorParser = OpenWeatherErrorParser()
+        return networkStack.makeRequest(request: request, responseParser: parser, errorParser: errorParser)
     }
 
-    func getWeatherList(for location: CLLocation) -> Observable<WeatherList, FiveDayForecastServiceError>  {
-        return nil
+    private func getRequest(for location: CLLocation) -> Request {
+        let fullURL = baseURL
+            .appendingPathComponent("data")
+            .appendingPathComponent("2.5")
+            .appendingPathComponent("forecast")
+        let headers = [String: String]()
+        let additionalQueryParameters = ["lat": String(format: "%f", location.coordinate.latitude),
+                                         "lon": String(format: "%f", location.coordinate.longitude)]
+        let queryParameters = addAuthenticationToQueryParameters(queryParameters: additionalQueryParameters)
+        return Request(method: .get, url: fullURL, headers: headers, queryParameters: queryParameters)
     }
 }

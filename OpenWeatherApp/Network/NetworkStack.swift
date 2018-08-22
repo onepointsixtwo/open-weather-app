@@ -17,7 +17,7 @@ enum Method {
 }
 
 struct Request {
-    let method: HTTPCookie
+    let method: Method
     let url: URL
     let headers: [String: String]
     let queryParameters: [String: String]
@@ -26,7 +26,7 @@ struct Request {
 protocol ResponseParseable {
     associatedtype T
 
-    func parseResponseData(data: Data) -> T?
+    func parseResponseData(data: Data) throws -> T
 }
 
 protocol ErrorParseable {

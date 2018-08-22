@@ -24,7 +24,14 @@ class URLSessionNetworkStack: NetworkStack {
         let observable = Observable<R.T, E.E> { [unowned self] (observer, lifecycle) in
             let task = self.urlSession.dataTask(with: urlRequest, completionHandler: { (data, response, error) in
                 if let data = data {
-                    let parsed = responseParser.parseResponseData(data: data)
+                    var parsed: R.T?
+                    
+                    do {
+                        parsed = try responseParser.parseResponseData(data: data)
+                    } catch {
+                        print("Error attempting to parse data \(error)")
+                    }
+
                     if let parsed = parsed {
                         observer.setFinishedWithSuccess(value: parsed)
                     } else {
@@ -43,7 +50,7 @@ class URLSessionNetworkStack: NetworkStack {
         return observable
     }
 
-    // Really really quick and dirty
+    // Really,  really quick and dirty
     private func createUrlRequest(from request: Request) -> URLRequest {
         let queryParameters = request.queryParameters.map { (key, value) -> String in
             return "\(key)=\(value)"

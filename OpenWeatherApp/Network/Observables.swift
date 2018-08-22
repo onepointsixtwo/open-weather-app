@@ -29,8 +29,8 @@ public final class Observable<V: Any, E: Error>: Lifecycle {
     }
 
     public init(creationBlock: @escaping (Observer<V, E>, Lifecycle) -> Void) {
-        let observer = Observer<V, E> { [weak self] result in
-            self?.handleResultReceived(result: result)
+        let observer = Observer<V, E> { result in
+            self.handleResultReceived(result: result)
         }
 
         creationBlock(observer, self)

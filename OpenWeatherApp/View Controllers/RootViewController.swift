@@ -14,6 +14,9 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
     var pageViewController: UIPageViewController!
     @IBOutlet weak var addButton: UIButton!
 
+    private var observable: Observable<WeatherList, OpenWeatherError>?
+    private var observable2: Observable<UIImage, OpenWeatherError>?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -35,6 +38,8 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
         self.pageViewController!.view.frame = pageViewRect
 
         self.pageViewController!.didMove(toParentViewController: self)
+
+        //TODO: set up services
     }
 
     override func didReceiveMemoryWarning() {
@@ -95,6 +100,32 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
 extension RootViewController: MapViewControllerDelegate {
     func mapViewDidSelectCoordinates(coordinates: CLLocationCoordinate2D) {
         modelController.addNewLocation(location: coordinates)
+
+        let networkStack = URLSessionNetworkStack(urlSession: URLSession(configuration: URLSessionConfiguration.default))
+        let credentials = OpenWeatherCredentials(apiKey: "5c2c7e757185f2faa7dda8bfa413070d")
+        let fiveDayForecastService = FiveDayForecastService(networkStack: networkStack, credentials: credentials, baseURL: URL(string:"https://api.openweathermap.org")!)
+        let obs = fiveDayForecastService.getWeatherList(for: CLLocation(latitude: coordinates.latitude, longitude: coordinates.longitude))
+        obs.startWithResult { result in
+            switch result {
+            case .success(let list):
+                self.loadImageFromList(list: list)
+            default:
+                break
+            }
+        }
+    }
+
+    private func loadImageFromList(list: WeatherList) {
+        if let itemZero = list.list.first,
+            let weather = itemZero.weather.first {
+            let networkStack = URLSessionNetworkStack(urlSession: URLSession(configuration: URLSessionConfiguration.default))
+            let credentials = OpenWeatherCredentials(apiKey: "5c2c7e757185f2faa7dda8bfa413070d")
+            let iconService = IconService(networkStack: networkStack, credentials: credentials, baseURL: URL(string:"https://api.openweathermap.org")!)
+            observable2 = iconService.fetchIcon(for: weather)
+            observable2?.startWithResult(resultBlock: { result in
+                print(result)
+            })
+        }
     }
 }
 
