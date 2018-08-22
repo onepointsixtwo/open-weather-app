@@ -123,6 +123,7 @@ class ForecastViewModel {
     }
 
     private func hourFromItem(item: WeatherListItem) -> Hour {
+        // None of the strings are i18n compliant for time saving
         let temperature = String(format: "%.1f°C", kelvinToCelsius(kelvin: item.main.temp))
         let time = hoursFormatter.string(from: item.dt)
         // Unsafe unwrapping only used for time saving.

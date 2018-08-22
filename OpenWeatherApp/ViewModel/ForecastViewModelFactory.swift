@@ -10,7 +10,7 @@ import CoreLocation
 import Foundation
 
 class ForecastViewModelFactory {
-    let forecastService: FiveDayForecastService
+    private let forecastService: FiveDayForecastService
 
     init(forecastService: FiveDayForecastService) {
         self.forecastService = forecastService

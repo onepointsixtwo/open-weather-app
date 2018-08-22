@@ -20,7 +20,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qJ6-i3-xj7">
-                        <rect key="frame" x="32" y="70" width="27" height="12"/>
+                        <rect key="frame" x="32" y="66" width="27" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="PVt-SL-53o"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -32,7 +35,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gAC-ov-jp2">
-                        <rect key="frame" x="18" y="25" width="55" height="43"/>
+                        <rect key="frame" x="18" y="25" width="55" height="39"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="55" id="LWz-oe-WHw"/>
                         </constraints>

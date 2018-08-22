@@ -31,6 +31,7 @@ class WeatherImageLoader {
     func loadImageIntoImageView() {
         if let existing = existingCacheValue() {
             imageView.image = existing
+            return
         }
 
         currentLoad = iconService.fetchIcon(for: weather).startWithResult(resultBlock: { [unowned self] result in

@@ -20,6 +20,7 @@
 		EA069B3E212DCAA90096266C /* WeatherImageLoaderFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA069B3D212DCAA90096266C /* WeatherImageLoaderFactory.swift */; };
 		EA069B40212DD0300096266C /* HourWeatherCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA069B3F212DD0300096266C /* HourWeatherCollectionViewCell.xib */; };
 		EA069B42212DD11A0096266C /* HourWeatherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA069B41212DD11A0096266C /* HourWeatherCollectionViewCell.swift */; };
+		EA069B44212DE0E90096266C /* ForecastViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA069B43212DE0E90096266C /* ForecastViewModelTests.swift */; };
 		EA18F44F212C7401007AEB93 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA18F44E212C7401007AEB93 /* AppDelegate.swift */; };
 		EA18F451212C7401007AEB93 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA18F450212C7401007AEB93 /* RootViewController.swift */; };
 		EA18F453212C7401007AEB93 /* ForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA18F452212C7401007AEB93 /* ForecastViewController.swift */; };
@@ -27,7 +28,6 @@
 		EA18F458212C7401007AEB93 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA18F456212C7401007AEB93 /* Main.storyboard */; };
 		EA18F45A212C7405007AEB93 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA18F459212C7405007AEB93 /* Assets.xcassets */; };
 		EA18F45D212C7405007AEB93 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA18F45B212C7405007AEB93 /* LaunchScreen.storyboard */; };
-		EA18F468212C7405007AEB93 /* OpenWeatherAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA18F467212C7405007AEB93 /* OpenWeatherAppTests.swift */; };
 		EA18F473212C7852007AEB93 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA18F472212C7852007AEB93 /* MapViewController.swift */; };
 		EA18F476212C9641007AEB93 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA18F475212C9641007AEB93 /* CoreLocation.framework */; };
 		EA18F47A212D2FFB007AEB93 /* Observables.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA18F479212D2FFB007AEB93 /* Observables.swift */; };
@@ -60,6 +60,7 @@
 		EA069B3D212DCAA90096266C /* WeatherImageLoaderFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherImageLoaderFactory.swift; sourceTree = "<group>"; };
 		EA069B3F212DD0300096266C /* HourWeatherCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HourWeatherCollectionViewCell.xib; sourceTree = "<group>"; };
 		EA069B41212DD11A0096266C /* HourWeatherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourWeatherCollectionViewCell.swift; sourceTree = "<group>"; };
+		EA069B43212DE0E90096266C /* ForecastViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewModelTests.swift; sourceTree = "<group>"; };
 		EA18F44B212C7401007AEB93 /* OpenWeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenWeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA18F44E212C7401007AEB93 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EA18F450212C7401007AEB93 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
@@ -70,7 +71,6 @@
 		EA18F45C212C7405007AEB93 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EA18F45E212C7405007AEB93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA18F463212C7405007AEB93 /* OpenWeatherAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenWeatherAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		EA18F467212C7405007AEB93 /* OpenWeatherAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherAppTests.swift; sourceTree = "<group>"; };
 		EA18F469212C7405007AEB93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA18F472212C7852007AEB93 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		EA18F475212C9641007AEB93 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -170,8 +170,8 @@
 		EA18F466212C7405007AEB93 /* OpenWeatherAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				EA18F467212C7405007AEB93 /* OpenWeatherAppTests.swift */,
 				EA18F469212C7405007AEB93 /* Info.plist */,
+				EA069B43212DE0E90096266C /* ForecastViewModelTests.swift */,
 			);
 			path = OpenWeatherAppTests;
 			sourceTree = "<group>";
@@ -346,7 +346,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA18F468212C7405007AEB93 /* OpenWeatherAppTests.swift in Sources */,
+				EA069B44212DE0E90096266C /* ForecastViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

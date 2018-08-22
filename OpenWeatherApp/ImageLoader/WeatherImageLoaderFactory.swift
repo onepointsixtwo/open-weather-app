@@ -11,8 +11,8 @@ import UIKit
 
 class WeatherImageLoaderFactory {
 
-    let iconService: IconService
-    let cache: NSCache<NSString, UIImage>
+    private let iconService: IconService
+    private let cache: NSCache<NSString, UIImage>
 
     init(iconService: IconService) {
         self.iconService = iconService

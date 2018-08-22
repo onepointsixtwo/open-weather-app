@@ -10,6 +10,9 @@ import CoreLocation
 import MapKit
 import UIKit
 
+/*
+    For speed, the logic in this file has not been separated out into a presenter or view model but were this a 'real' app it would have been.
+ */
 protocol MapViewControllerDelegate: class {
     func mapViewDidSelectCoordinates(coordinates: CLLocationCoordinate2D)
 }

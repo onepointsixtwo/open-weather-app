@@ -9,6 +9,11 @@
 import MapKit
 import UIKit
 
+/*
+ Other than the creation of the dependencies, and a few minor additions this file was pretty much auto-generated
+ and I haven't spent much time in cleaning it up for a quick demo project.
+ */
+
 class RootViewController: UIViewController, UIPageViewControllerDelegate {
 
     var pageViewController: UIPageViewController!
@@ -105,13 +110,17 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
         return .mid
     }
 
-     // MARK: - Navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destination = segue.destination
         if let map = destination as? MapViewController {
             map.delegate = self
         }
-     }
+    }
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 }
 
 extension RootViewController: MapViewControllerDelegate {
