@@ -9,9 +9,13 @@
 import CoreLocation
 import Foundation
 
-class FiveDayForecastService: BaseOpenWeatherService {
+protocol FiveDayForecastService {
+    func getWeatherList(for location: CLLocation) -> Observable<Forecast, OpenWeatherError>
+}
 
-    func getWeatherList(for location: CLLocation) -> Observable<WeatherList, OpenWeatherError>  {
+class FiveDayForecastServiceImpl: BaseOpenWeatherService, FiveDayForecastService {
+
+    func getWeatherList(for location: CLLocation) -> Observable<Forecast, OpenWeatherError>  {
         let request = getRequest(for: location)
         let parser = WeatherListParser()
         let errorParser = OpenWeatherErrorParser()

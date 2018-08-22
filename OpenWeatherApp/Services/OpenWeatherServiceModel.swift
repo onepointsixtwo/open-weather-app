@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct WeatherList: Codable {
+struct Forecast: Codable {
     let list: [WeatherListItem]
 }
 
@@ -33,12 +33,12 @@ enum OpenWeatherError: Error {
 
 //TODO: move out parsers.
 class WeatherListParser: ResponseParseable {
-    typealias T = WeatherList
+    typealias T = Forecast
 
-    func parseResponseData(data: Data) throws -> WeatherList {
+    func parseResponseData(data: Data) throws -> Forecast {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .secondsSince1970
-        return try decoder.decode(WeatherList.self, from: data)
+        return try decoder.decode(Forecast.self, from: data)
     }
 }
 

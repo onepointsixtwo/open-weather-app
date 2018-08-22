@@ -14,11 +14,20 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
     var pageViewController: UIPageViewController!
     @IBOutlet weak var addButton: UIButton!
 
-    private var observable: Observable<WeatherList, OpenWeatherError>?
+    private var observable: Observable<Forecast, OpenWeatherError>?
     private var observable2: Observable<UIImage, OpenWeatherError>?
+
+    let credentials = OpenWeatherCredentials(apiKey: "5c2c7e757185f2faa7dda8bfa413070d")
+    let baseURL = URL(string: "https://api.openweathermap.org")!
+    var networkStack: NetworkStack!
+    var forecastService: FiveDayForecastService!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        networkStack = URLSessionNetworkStack(urlSession: URLSession(configuration: URLSessionConfiguration.default))
+        forecastService = FiveDayForecastServiceImpl(networkStack: networkStack, credentials: credentials, baseURL: baseURL)
+
         // Do any additional setup after loading the view, typically from a nib.
         // Configure the page view controller and add it as a child view controller.
         self.pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
@@ -51,7 +60,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
         // Return the model controller object, creating it if necessary.
         // In more complex implementations, the model controller may be passed to the view controller.
         if _modelController == nil {
-            _modelController = ModelController(pageViewController: pageViewController, storyboard: self.storyboard!)
+            _modelController = ModelController(pageViewController: pageViewController, storyboard: self.storyboard!, viewModelFactory: ForecastViewModelFactory(forecastService: forecastService))
         }
         return _modelController!
     }
@@ -72,7 +81,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
         }
 
         // In landscape orientation: Set set the spine location to "mid" and the page view controller's view controllers array to contain two view controllers. If the current page is even, set it to contain the current and next view controllers; if it is odd, set the array to contain the previous and current view controllers.
-        let currentViewController = self.pageViewController!.viewControllers![0] as! DataViewController
+        let currentViewController = self.pageViewController!.viewControllers![0] as! ForecastViewController
         var viewControllers: [UIViewController]
 
         let indexOfCurrentViewController = self.modelController.indexOfViewController(currentViewController)
@@ -100,32 +109,6 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
 extension RootViewController: MapViewControllerDelegate {
     func mapViewDidSelectCoordinates(coordinates: CLLocationCoordinate2D) {
         modelController.addNewLocation(location: coordinates)
-
-        let networkStack = URLSessionNetworkStack(urlSession: URLSession(configuration: URLSessionConfiguration.default))
-        let credentials = OpenWeatherCredentials(apiKey: "5c2c7e757185f2faa7dda8bfa413070d")
-        let fiveDayForecastService = FiveDayForecastService(networkStack: networkStack, credentials: credentials, baseURL: URL(string:"https://api.openweathermap.org")!)
-        let obs = fiveDayForecastService.getWeatherList(for: CLLocation(latitude: coordinates.latitude, longitude: coordinates.longitude))
-        obs.startWithResult { result in
-            switch result {
-            case .success(let list):
-                self.loadImageFromList(list: list)
-            default:
-                break
-            }
-        }
-    }
-
-    private func loadImageFromList(list: WeatherList) {
-        if let itemZero = list.list.first,
-            let weather = itemZero.weather.first {
-            let networkStack = URLSessionNetworkStack(urlSession: URLSession(configuration: URLSessionConfiguration.default))
-            let credentials = OpenWeatherCredentials(apiKey: "5c2c7e757185f2faa7dda8bfa413070d")
-            let iconService = IconService(networkStack: networkStack, credentials: credentials, baseURL: URL(string:"https://api.openweathermap.org")!)
-            observable2 = iconService.fetchIcon(for: weather)
-            observable2?.startWithResult(resultBlock: { result in
-                print(result)
-            })
-        }
     }
 }
 

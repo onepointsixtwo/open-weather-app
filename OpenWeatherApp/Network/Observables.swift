@@ -14,7 +14,7 @@ import Foundation
  It doesn't attempt to include any of the nice mapping features, threading features etc. due to time constraints.
  */
 
-public final class Observable<V: Any, E: Error>: Lifecycle {
+public final class Observable<V: Any, E: Error>: Lifecycle, Cancellable {
 
     private var result: Result<V, E>?
     private var cancelListener: (() -> Void)?
@@ -51,11 +51,12 @@ public final class Observable<V: Any, E: Error>: Lifecycle {
         self.cancelListener?()
     }
 
-    public func startWithResult(resultBlock: @escaping (Result<V,E>) -> Void) {
+    public func startWithResult(resultBlock: @escaping (Result<V,E>) -> Void) -> Cancellable {
         self.resultListener = resultBlock
         if let existingResult = self.result {
             resultBlock(existingResult)
         }
+        return self
     }
 
     private func handleResultReceived(result: Result<V, E>) {
@@ -79,6 +80,10 @@ public class Observer<V: Any, E: Error> {
     public func setFinishedWithFailure(error: E) {
         self.resultListener(Result<V, E>.failed(error: error))
     }
+}
+
+public protocol Cancellable {
+    func cancel()
 }
 
 public protocol Lifecycle {
