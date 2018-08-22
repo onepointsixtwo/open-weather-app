@@ -6,33 +6,31 @@
 //  Copyright © 2018 John Kartupelis. All rights reserved.
 //
 
+import MapKit
 import UIKit
 
 class RootViewController: UIViewController, UIPageViewControllerDelegate {
 
-    var pageViewController: UIPageViewController?
-
+    var pageViewController: UIPageViewController!
+    @IBOutlet weak var addButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         // Configure the page view controller and add it as a child view controller.
-        self.pageViewController = UIPageViewController(transitionStyle: .pageCurl, navigationOrientation: .horizontal, options: nil)
+        self.pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         self.pageViewController!.delegate = self
-
-        let startingViewController: DataViewController = self.modelController.viewControllerAtIndex(0, storyboard: self.storyboard!)!
-        let viewControllers = [startingViewController]
-        self.pageViewController!.setViewControllers(viewControllers, direction: .forward, animated: false, completion: {done in })
 
         self.pageViewController!.dataSource = self.modelController
 
         self.addChildViewController(self.pageViewController!)
-        self.view.addSubview(self.pageViewController!.view)
+        self.view.insertSubview(self.pageViewController!.view, at: 1)
+        self.view.bringSubview(toFront: addButton)
 
         // Set the page view controller's bounds using an inset rect so that self's view is visible around the edges of the pages.
         var pageViewRect = self.view.bounds
         if UIDevice.current.userInterfaceIdiom == .pad {
-            pageViewRect = pageViewRect.insetBy(dx: 40.0, dy: 40.0)
+            pageViewRect = pageViewRect.insetBy(dx: 0.0, dy: 0.0)
         }
         self.pageViewController!.view.frame = pageViewRect
 
@@ -48,7 +46,7 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
         // Return the model controller object, creating it if necessary.
         // In more complex implementations, the model controller may be passed to the view controller.
         if _modelController == nil {
-            _modelController = ModelController()
+            _modelController = ModelController(pageViewController: pageViewController, storyboard: self.storyboard!)
         }
         return _modelController!
     }
@@ -85,6 +83,18 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
         return .mid
     }
 
+     // MARK: - Navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destination = segue.destination
+        if let map = destination as? MapViewController {
+            map.delegate = self
+        }
+     }
+}
 
+extension RootViewController: MapViewControllerDelegate {
+    func mapViewDidSelectCoordinates(coordinates: CLLocationCoordinate2D) {
+        modelController.addNewLocation(location: coordinates)
+    }
 }
 

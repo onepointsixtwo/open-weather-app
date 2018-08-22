@@ -6,28 +6,19 @@
 //  Copyright © 2018 John Kartupelis. All rights reserved.
 //
 
+import MapKit
 import UIKit
-
-/*
- A controller object that manages a simple model -- a collection of month names.
- 
- The controller serves as the data source for the page view controller; it therefore implements pageViewController:viewControllerBeforeViewController: and pageViewController:viewControllerAfterViewController:.
- It also implements a custom method, viewControllerAtIndex: which is useful in the implementation of the data source methods, and in the initial configuration of the application.
- 
- There is no need to actually create view controllers for each page in advance -- indeed doing so incurs unnecessary overhead. Given the data model, these methods create, configure, and return a new view controller on demand.
- */
-
 
 class ModelController: NSObject, UIPageViewControllerDataSource {
 
-    var pageData: [String] = []
+    let pageViewController: UIPageViewController
+    let storyboard: UIStoryboard
+    private var pageData = [CLLocation]()
 
-
-    override init() {
-        super.init()
-        // Create the data model.
-        let dateFormatter = DateFormatter()
-        pageData = dateFormatter.monthSymbols
+    init(pageViewController: UIPageViewController,
+         storyboard: UIStoryboard) {
+        self.pageViewController = pageViewController
+        self.storyboard = storyboard
     }
 
     func viewControllerAtIndex(_ index: Int, storyboard: UIStoryboard) -> DataViewController? {
@@ -73,5 +64,20 @@ class ModelController: NSObject, UIPageViewControllerDataSource {
         return self.viewControllerAtIndex(index, storyboard: viewController.storyboard!)
     }
 
+    func addNewLocation(location: CLLocationCoordinate2D) {
+        pageViewController.dataSource = nil
+        pageViewController.dataSource = self
+
+        let location = CLLocation(latitude: location.latitude, longitude: location.longitude)
+        pageData.append(location)
+
+        var controllers = self.pageViewController.viewControllers ?? [UIViewController]()
+        if controllers.count == 0 {
+            let dataViewController = storyboard.instantiateViewController(withIdentifier: "DataViewController") as! DataViewController
+            dataViewController.dataObject = location
+            controllers.append(dataViewController)
+            pageViewController.setViewControllers(controllers, direction: .forward, animated: true, completion: nil)
+        }
+    }
 }
 

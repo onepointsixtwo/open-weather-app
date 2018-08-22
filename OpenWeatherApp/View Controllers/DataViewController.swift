@@ -6,29 +6,22 @@
 //  Copyright © 2018 John Kartupelis. All rights reserved.
 //
 
+import MapKit
 import UIKit
 
 class DataViewController: UIViewController {
 
     @IBOutlet weak var dataLabel: UILabel!
-    var dataObject: String = ""
+    var dataObject: CLLocation!
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.dataLabel!.text = dataObject
+        self.dataLabel!.text = String(format: "%.02f, %.02f", dataObject.coordinate.latitude, dataObject.coordinate.longitude)
     }
-
-
 }
 
