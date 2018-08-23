@@ -29,4 +29,4 @@ There are a number of things I have allowed in this project which I would not co
 
 A demo of the app is below. It's a little quick and dirty, but it functions.
 
-![Demo][https://github.com/onepointsixtwo/open-weather-app/blob/master/demo.gif]
+![Demo](https://github.com/onepointsixtwo/open-weather-app/blob/master/demo.gif)
