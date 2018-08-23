@@ -23,3 +23,10 @@ There are a number of things I have allowed in this project which I would not co
 * Implementation of network stack only caters for simple GET requests
 
 * Errors all parse to a 'general' case which would be pretty unhelpful for a real REST service where you'd want to know things like the status code of the response.
+
+
+## Demo
+
+A demo of the app is below. It's a little quick and dirty, but it functions.
+
+![Demo][https://github.com/onepointsixtwo/open-weather-app/blob/master/demo.gif]
